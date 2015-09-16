@@ -1,6 +1,6 @@
 module CsvPiper
   module Processors
-    class OutputCollector
+    class CollectOutput
       attr_reader :output
       def initialize(collect_when_invalid: true)
         @output = []

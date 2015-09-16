@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CsvPiper::Processors::ErrorCollector do
+describe CsvPiper::Processors::CollectErrors do
   let(:row) { 7 }
   let(:collector) { described_class.new }
   let(:row_error) { error_for_row(row) }

@@ -8,8 +8,8 @@ describe CsvPiper::Piper do
   let(:basic_csv_row) { { "Attr 1" => 'Value 1', "Attr 2" => 'Value 2' } }
   let(:basic_csv_row2) { { "Attr 1" => 'Value 2', "Attr 2" => 'Value 3' } }
   let(:basic_headers) { basic_csv_row.keys }
-  let(:output_collector) { CsvPiper::Processors::OutputCollector.new }
-  let(:error_collector) { CsvPiper::Processors::ErrorCollector.new }
+  let(:output_collector) { CsvPiper::Processors::CollectOutput.new }
+  let(:error_collector) { CsvPiper::Processors::CollectErrors.new }
 
   describe 'file setup is valid' do
     describe 'collectors' do

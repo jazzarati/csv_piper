@@ -11,7 +11,7 @@ describe 'end to end' do
 
   it 'processes a csv file' do
     output_collector = ProcessedEquationCollector.new
-    error_collector = CsvPiper::Processors::ErrorCollector.new
+    error_collector = CsvPiper::Processors::CollectErrors.new
 
     File.open(File.join(File.dirname(__FILE__),"/data/csv_1.csv")) do |file|
 

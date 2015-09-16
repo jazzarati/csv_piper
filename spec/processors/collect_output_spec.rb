@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CsvPiper::Processors::OutputCollector do
+describe CsvPiper::Processors::CollectOutput do
   let(:row1) { { awesome: :magic } }
   let(:row2) { { tragic: :tragedy } }
   let(:row3) { { fantastic: :food } }

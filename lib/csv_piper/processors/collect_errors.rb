@@ -1,6 +1,6 @@
 module CsvPiper
   module Processors
-    class ErrorCollector
+    class CollectErrors
       attr_reader :errors
       def initialize
         @errors = {}

@@ -40,7 +40,7 @@ _Extracted from `spec/end_to_end_spec.rb`_
 ```ruby
 # Build some processors beforehand so we can access them later
 output_collector = ProcessedEquationCollector.new
-error_collector = CsvPiper::Processors::ErrorCollector.new
+error_collector = CsvPiper::Processors::CollectErrors.new
 
 # Open the csv file to get our io source
 File.open(File.join(File.dirname(__FILE__),"/data/csv_1.csv")) do |file|
@@ -150,14 +150,14 @@ Eg. `CsvPiper::Builder.new.from(io).with_processors(processors).build.process`
 ## Pre-made Processors
 Over time we will collect a bunch of general purpose processors that anyone can use. They can be found in the `lib/processors` folder but here are a couple:
 
-* `OutputCollector`: Collects the transformed object of every row that is passed through it
-* `ErrorCollector`: Collects the `RowError` object of every row that is passed through it
+* `CollectOutput`: Collects the transformed object of every row that is passed through it
+* `CollectErrors`: Collects the `RowError` object of every row that is passed through it
 
-By using `OutputCollector` and to a lesser extent `ErrorCollector` you will start to build up objects in memory. For very large csv files you might not want to use these convenience processors and rather create a new processor that does whatever you need with the row (Ie. log, write to db) which will then be discarded rather than collected.
+By using `CollectOutput` and to a lesser extent `CollectErrors` you will start to build up objects in memory. For very large csv files you might not want to use these convenience processors and rather create a new processor that does whatever you need with the row (Ie. log, write to db) which will then be discarded rather than collected.
 
 Require them explicitly if you want to use them.
 
-Eg. `require 'csv_piper/processors/output_collector'`
+Eg. `require 'csv_piper/processors/collect_output'`
 
 
 ## Development
@@ -166,7 +166,7 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/csv_piper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jazzarati/csv_piper.
 
 ## License
 
