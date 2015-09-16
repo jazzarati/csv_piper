@@ -10,7 +10,7 @@ describe 'end to end' do
   end
 
   it 'processes a csv file' do
-    output_collector = ProcessedEquationCollector.new
+    output_collector = CollectProcessedEquations.new
     error_collector = CsvPiper::Processors::CollectErrors.new
 
     File.open(File.join(File.dirname(__FILE__),"/data/csv_1.csv")) do |file|
@@ -52,7 +52,7 @@ describe 'end to end' do
     end
   end
 
-  class ProcessedEquationCollector
+  class CollectProcessedEquations
     attr_reader :output
     def initialize
       @output = []

@@ -39,7 +39,7 @@ end
 _Extracted from `spec/end_to_end_spec.rb`_
 ```ruby
 # Build some processors beforehand so we can access them later
-output_collector = ProcessedEquationCollector.new
+output_collector = CollectProcessedEquations.new
 error_collector = CsvPiper::Processors::CollectErrors.new
 
 # Open the csv file to get our io source
@@ -80,7 +80,7 @@ class EvaluateEquation
     end
 end
 
-class ProcessedEquationCollector
+class CollectProcessedEquations
     attr_reader :output
     def initialize
         @output = []
