@@ -57,10 +57,10 @@ File.open(File.join(File.dirname(__FILE__),"/data/csv_1.csv")) do |file|
     csv_piper.process if csv_piper.has_required_headers?
 end
 
-    # Grab some output we wanted to collect (You don't have to do this, espicially when processing lots of data)
-    output = output_collector.output
-    errors = error_collector.errors
-end
+# Grab some output we wanted to collect (You don't have to do this, espicially when processing lots of data)
+output = output_collector.output
+errors = error_collector.errors
+
 
 class BuildEquation
     def process(source, transformed, errors)
@@ -117,7 +117,7 @@ Pre-processors work the same as processors except that their purpose is to modif
 
 They are also allowed to add errors against the row.
 
-Here is an example of a pre-processor that converts all values to lowercase:
+Here is an example of a pre-processor that converts all values to uppercase:
 ```ruby
 class UpCase
   def process(source, errors)
