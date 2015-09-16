@@ -137,7 +137,10 @@ This object is passed into each processor (which must pass it on) and is used to
 Add errors using `errors.add(error_key, error)`.
 
 #### Builder Options
-All builder options utilise the _fluent interface pattern_ and should be followed by a call to `process` to process the csv.
+All builder options utilise the _fluent interface pattern_ and should be followed by a call to `build` to get the piper instance and then `process` to process the csv.
+
+Eg. `CsvPiper::Builder.new.from(io).with_processors(processors).build.process`
+
 * `from(io_stream)`: Specifies the **open** io stream to read csv data from
 * `with_pre_processors(pre_processors)`: Takes an array of pre-processors which will transform each row before it is handled by processors
 * `with_processors(processors)`: Takes an array of processors which do all the interesting domain based work
@@ -152,7 +155,9 @@ Over time we will collect a bunch of general purpose processors that anyone can 
 
 By using `OutputCollector` and to a lesser extent `ErrorCollector` you will start to build up objects in memory. For very large csv files you might not want to use these convenience processors and rather create a new processor that does whatever you need with the row (Ie. log, write to db) which will then be discarded rather than collected.
 
-Require them explicitly if you want to use them. Eg. `require 'csv_piper/processors/output_collector'`
+Require them explicitly if you want to use them.
+
+Eg. `require 'csv_piper/processors/output_collector'`
 
 
 ## Development
