@@ -95,21 +95,6 @@ describe CsvPiper::Piper do
       end
     end
 
-    describe 'default pre-processors' do
-      it 'removes extra columns' do
-        file = CsvImportTestUtils::CSVMockFile.create(basic_headers + ['']) do |f|
-          f.add( basic_csv_row.merge('' => '') )
-        end
-
-        CsvPiper::Builder.new.from(file)
-          .with_processors([CsvImportTestUtils::Processors::PassThrough.new, output_collector])
-          .build
-          .process
-
-        expect(output_collector.output).to eq([basic_csv_row])
-      end
-    end
-
     describe 'skip rows' do
       it 'skips empty rows' do
         file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|

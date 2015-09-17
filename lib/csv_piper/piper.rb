@@ -5,7 +5,7 @@ module CsvPiper
     CSV_HEADER_OPTIONS = { headers: true, return_headers: true, skip_blanks: true, skip_lines: /^(\s*,)*$/ }
 
     def initialize(io_stream:, pre_processors: [], processors: [], csv_options: {}, required_headers: [])
-      @pre_processors = [PreProcessors::RemoveExtraColumns.new] + pre_processors
+      @pre_processors = pre_processors
       @processors = processors
       @required_headers = required_headers
       @csv_options = csv_options.merge(CSV_HEADER_OPTIONS)
