@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jazzarati/csv_piper.svg?branch=master)](https://travis-ci.org/jazzarati/csv_piper)
+
 # CsvPiper
 
 A simple wrapper to create a pipeline style csv processor that makes your transforms easily testable.
