@@ -26,6 +26,7 @@ CsvPiper handles CSV reading row by row passing each row through a series of pro
 * Currently source csv must have headers
 
 #### Basic Usage
+
 ```ruby
 File.open("my/file/path", "r") do |io_stream|
     CsvPiper::Builder.new.from(io_stream).with_processors([your_processors]).build.process
@@ -37,6 +38,7 @@ end
 
 #### Basic Usage with Processors
 _Extracted from `spec/end_to_end_spec.rb`_
+
 ```ruby
 # Build some processors beforehand so we can access them later
 output_collector = CollectProcessedEquations.new
@@ -97,6 +99,7 @@ end
 Each processor can do whatever it wants, transformation, logging, saving to a database etc.
 
 Here is an example of a processor that passes the values from the csv straight along to the transformed output:
+
 ```ruby
 class PassThrough
   def process(source, transformed, errors)
@@ -118,6 +121,7 @@ Pre-processors work the same as processors except that their purpose is to modif
 They are also allowed to add errors against the row.
 
 Here is an example of a pre-processor that converts all values to uppercase:
+
 ```ruby
 class UpCase
   def process(source, errors)
@@ -152,6 +156,7 @@ Over time we will collect a bunch of general purpose processors that anyone can 
 
 * `CollectOutput`: Collects the transformed object of every row that is passed through it
 * `CollectErrors`: Collects the `RowError` object of every row that is passed through it
+* `CreateActiveModel`: Uses the transformed object as attributes and creates using it (Works with ActiveRecord models). Merges errors from model into row errors (Assumes ActiveModel::Errors interface).
 
 By using `CollectOutput` and to a lesser extent `CollectErrors` you will start to build up objects in memory. For very large csv files you might not want to use these convenience processors and rather create a new processor that does whatever you need with the row (Ie. log, write to db) which will then be discarded rather than collected.
 
@@ -159,6 +164,9 @@ Require them explicitly if you want to use them.
 
 Eg. `require 'csv_piper/processors/collect_output'`
 
+## Inspiration
+
+Initial inspiration crystalised upon seeing [Kiba](https://github.com/thbar/kiba). If you need to do extensive ETL (particularly if you don't have csv's) then strongly recommend you check it out.
 
 ## Development
 
