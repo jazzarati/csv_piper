@@ -45,6 +45,9 @@ output_collector = CollectProcessedEquations.new
 error_collector = CsvPiper::Processors::CollectErrors.new
 
 # Open the csv file to get our io source
+# Csv Data:
+# Input 1,Process,Input 2,Result
+# 1,+,1,2
 File.open(File.join(File.dirname(__FILE__),"/data/csv_1.csv")) do |file|
 
     # Build piper
@@ -154,8 +157,9 @@ Eg. `CsvPiper::Builder.new.from(io).with_processors(processors).build.process`
 ## Pre-made Processors
 Over time we will collect a bunch of general purpose processors that anyone can use. They can be found in the `lib/processors` folder but here are a couple:
 
-* `CollectOutput`: Collects the transformed object of every row that is passed through it
-* `CollectErrors`: Collects the `RowError` object of every row that is passed through it
+* `Copy`: Copies or maps key-values from the source row into the transformed object.
+* `CollectOutput`: Collects the transformed object of every row that is passed through it.
+* `CollectErrors`: Collects the `RowError` object of every row that is passed through it.
 * `CreateActiveModel`: Uses the transformed object as attributes and creates using it (Works with ActiveRecord models). Merges errors from model into row errors (Assumes ActiveModel::Errors interface).
 
 By using `CollectOutput` and to a lesser extent `CollectErrors` you will start to build up objects in memory. For very large csv files you might not want to use these convenience processors and rather create a new processor that does whatever you need with the row (Ie. log, write to db) which will then be discarded rather than collected.
