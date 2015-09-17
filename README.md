@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jazzarati/csv_piper.svg?branch=master)](https://travis-ci.org/jazzarati/csv_piper)
+[![Gem Version](https://badge.fury.io/rb/csv_piper.svg)](http://badge.fury.io/rb/csv_piper) [![Build Status](https://travis-ci.org/jazzarati/csv_piper.svg?branch=master)](https://travis-ci.org/jazzarati/csv_piper)
 
 # CsvPiper
 
