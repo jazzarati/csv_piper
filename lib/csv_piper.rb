@@ -1,6 +1,5 @@
-require "csv_piper/version"
-require "csv_piper/piper"
-require "csv_piper/builder"
-require "csv_piper/errors/row"
-require "csv_piper/pre_processors/remove_extra_columns"
-require "csv"
+require 'csv_piper/version'
+require 'csv_piper/piper'
+require 'csv_piper/builder'
+require 'csv_piper/errors/row'
+require 'csv'

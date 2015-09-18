@@ -170,6 +170,10 @@ Require them explicitly if you want to use them.
 
 Eg. `require 'csv_piper/processors/collect_output'`
 
+## Test Support
+
+There is a CsvMockFile object that you can use to mock up an io csv source rather than working with on disk files for your tests. Just `require 'csv_piper/test_support/csv_mock_file'`.
+
 ## Inspiration
 
 Initial inspiration crystalised upon seeing [Kiba](https://github.com/thbar/kiba). If you need to do extensive ETL (particularly if you don't have csv's) then strongly recommend you check it out.

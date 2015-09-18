@@ -14,7 +14,7 @@ describe CsvPiper::Piper do
   describe 'file setup is valid' do
     describe 'collectors' do
       it 'collect output' do
-        file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
           f.add(basic_csv_row)
           f.add(basic_csv_row2)
         end
@@ -29,7 +29,7 @@ describe CsvPiper::Piper do
 
       describe 'error collector' do
         it 'collect errors' do
-          file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+          file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
             f.add(basic_csv_row)
             f.add(basic_csv_row2)
           end
@@ -44,7 +44,7 @@ describe CsvPiper::Piper do
         end
 
         it 'does not collect errors on rows where there are none' do
-          file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+          file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
             f.add(basic_csv_row)
           end
 
@@ -58,7 +58,7 @@ describe CsvPiper::Piper do
     describe 'processors' do
       let(:basic_csv_row_downcased) { { "Attr 1" => 'value 1', "Attr 2" => 'value 2' } }
       it 'passes through processors' do
-        file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
           f.add(basic_csv_row)
         end
 
@@ -78,7 +78,7 @@ describe CsvPiper::Piper do
     describe 'pre processors' do
       let(:basic_csv_row_upcased) { { "Attr 1" => 'VALUE 1', "Attr 2" => 'VALUE 2' } }
       it 'passes through to regular processors' do
-        file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
           f.add( basic_csv_row )
         end
 
@@ -97,7 +97,7 @@ describe CsvPiper::Piper do
 
     describe 'skip rows' do
       it 'skips empty rows' do
-        file = CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
           f.add( basic_csv_row )
           f.add( basic_csv_row.each_with_object({}) { |(k, v), memo| memo[k] = '' } )
           f.add( basic_csv_row )
@@ -112,7 +112,7 @@ describe CsvPiper::Piper do
       end
 
       it 'skips rows with different separators' do
-        file = CsvImportTestUtils::CSVMockFile.create(basic_headers,';') do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(basic_headers,';') do |f|
           f.add( basic_csv_row )
           f.add( basic_csv_row.each_with_object({}) { |(k, v), memo| memo[k] = '' } )
           f.add( basic_csv_row )
@@ -129,7 +129,7 @@ describe CsvPiper::Piper do
 
     describe 'csv options' do
       it 'converts strings to primitives' do
-        file = CsvImportTestUtils::CSVMockFile.create(%w(Int Float)) do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(%w(Int Float)) do |f|
           f.add( 'Int' => '12', 'Float' => '99.99' )
         end
 
@@ -145,7 +145,7 @@ describe CsvPiper::Piper do
         attrs = { 'Comma Values' => '"Words, with, commas"' }
         expected_attrs = { 'Comma Values' => 'Words, with, commas' }
 
-        file = CsvImportTestUtils::CSVMockFile.create(['Comma Values']) do |f|
+        file = CsvPiper::TestSupport::CsvMockFile.create(['Comma Values']) do |f|
           f.add( attrs )
         end
 
@@ -162,7 +162,7 @@ describe CsvPiper::Piper do
   describe 'file setup is invalid' do
     describe 'required setup parameters' do
       let(:file) do
-        CsvImportTestUtils::CSVMockFile.create(basic_headers) do |f|
+        CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
           f.add( basic_csv_row )
         end
       end
@@ -174,7 +174,7 @@ describe CsvPiper::Piper do
   end
 
   describe 'required headers' do
-    let(:file) { CsvImportTestUtils::CSVMockFile.create(['Bla']) }
+    let(:file) { CsvPiper::TestSupport::CsvMockFile.create(['Bla']) }
 
     context 'no headers required' do
       it 'has no errors' do
