@@ -31,7 +31,7 @@ describe 'end to end' do
     expect(output).to eq(expected_output)
     expect(errors.size).to eq(1)
     expect(errors.keys.first).to eq(3)
-    expect(errors[3].errors[:equation]).to eq(['anything * anything == 42 is not valid'])
+    expect(errors[3][:equation]).to eq(['anything * anything == 42 is not valid'])
   end
 
   class BuildEquation

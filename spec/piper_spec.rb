@@ -35,8 +35,8 @@ describe CsvPiper::Piper do
             .with_processors([CsvImportTestUtils::FlexiProcessors::Error.new("Phony Error"), error_collector])
             .build.process
 
-          expect(error_collector.errors[2].errors).to eq(phony_error: ["Phony Error"])
-          expect(error_collector.errors[3].errors).to eq(phony_error: ["Phony Error"])
+          expect(error_collector.errors[2]).to eq(phony_error: ["Phony Error"])
+          expect(error_collector.errors[3]).to eq(phony_error: ["Phony Error"])
         end
 
         it 'does not collect errors on rows where there are none' do
@@ -90,7 +90,7 @@ describe CsvPiper::Piper do
           .build.process
 
         expect(output_collector.output).to eq([basic_csv_row_downcased])
-        expect(error_collector.errors[2].errors).to eq(phony_error: ["Phony Error"])
+        expect(error_collector.errors[2]).to eq(phony_error: ["Phony Error"])
       end
     end
 
@@ -109,7 +109,7 @@ describe CsvPiper::Piper do
           .build.process
 
         expect(output_collector.output).to eq([basic_csv_row_upcased])
-        expect(error_collector.errors[2].errors).to eq(phony_error: ["Phony Error"])
+        expect(error_collector.errors[2]).to eq(phony_error: ["Phony Error"])
       end
     end
 

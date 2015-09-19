@@ -165,7 +165,7 @@ Over time we will collect a bunch of general purpose processors that anyone can 
 
 * `Copy`: Copies or maps key-values from the source row into the transformed object.
 * `CollectOutput`: Collects the transformed object of every row that is passed through it.
-* `CollectErrors`: Collects the `RowError` object of every row that is passed through it.
+* `CollectErrors`: Collects each non-empty errors hash against every row that is passed through it.
 * `CreateActiveModel`: Uses the transformed object as attributes and creates using it (Works with ActiveRecord models). Merges errors from model into row errors (Assumes ActiveModel::Errors interface).
 
 By using `CollectOutput` and to a lesser extent `CollectErrors` you will start to build up objects in memory. For very large csv files you might not want to use these convenience processors and rather create a new processor that does whatever you need with the row (Ie. log, write to db) which will then be discarded rather than collected.

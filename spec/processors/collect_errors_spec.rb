@@ -3,7 +3,6 @@ require 'spec_helper'
 describe CsvPiper::Processors::CollectErrors do
   let(:row) { 7 }
   let(:collector) { described_class.new }
-  let(:row_error) { error_for_row(row) }
 
   def error_for_row(row_index)
     errors = CsvPiper::Errors::Row.new(row_index)
@@ -12,14 +11,14 @@ describe CsvPiper::Processors::CollectErrors do
   end
 
   context 'with errors' do
-    let(:row2_error) { error_for_row(2) }
+    let(:row_error) { error_for_row(2) }
     before do
-      collector.process({},{},row2_error)
+      collector.process({},{},row_error)
       collector.process({},{},CsvPiper::Errors::Row.new(3))
     end
 
     it 'collects against a row index' do
-      expect(collector.errors[2]).to be(row2_error)
+      expect(collector.errors[2]).to be(row_error.errors)
     end
 
     it 'does not collect where there are no errors' do

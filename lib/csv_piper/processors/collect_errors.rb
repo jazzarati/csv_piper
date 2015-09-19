@@ -6,8 +6,8 @@ module CsvPiper
         @errors = {}
       end
 
-      def process(source, transformed, errors)
-        @errors[errors.row_index] = errors unless errors.empty?
+      def process(source, transformed, row_errors)
+        @errors[row_errors.row_index] = row_errors.errors unless row_errors.empty?
         [transformed, errors]
       end
     end
