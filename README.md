@@ -81,7 +81,7 @@ class EvaluateEquation
         begin
             transformed[:valid] = eval(transformed[:equation]) == true
         rescue Exception
-            errors.add(:msg, transformed[:equation] + ' is not a valid equation')
+            errors.add(:equation, transformed[:equation] + ' is not valid')
         end
         [transformed, errors]
     end
@@ -113,9 +113,11 @@ class PassThrough
 end
 ```
 
-* `source` is a frozen hash representing the row data out of the csv (with headers as keys)
+* `source` is a frozen hash representing the row data out of the csv (with headers as keys).
 * `transformed` is whatever has been passed on by the previous processor. The first processor will receive an empty hash.
-* `errors` is an instance of `CsvPiper::Errors::Row`
+* `errors` is an instance of `CsvPiper::Errors::Row`. This is really a convenience object for basic error collecting. You could choose to ignore it and implement your own error handling mechanisms.
+
+If you return `nil` instead of `[transformed, errors]` all further processing of the row will be skipped.
 
 _Return value_ is what will be passed into _transformed_ and _errors_ of the next processor
 
@@ -137,6 +139,8 @@ end
 ```
 * `source` is a hash representing the row data out of the csv which may have been modified by a previous pre-processor
 * `errors` is an instance of `CsvPiper::Errors::Row`
+
+If you return `nil` instead of `[transformed, errors]` all further processing of the row will be skipped.
 
 _Return value_ is what will be passed into _source_ and _errors_ of the next pre-processor (and processors). Final pre-processor value of _source_ will be passed to each processor as a frozen hash. Final pre-processor value of _errors_ will be passed to the first processor.
 

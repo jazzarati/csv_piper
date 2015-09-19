@@ -6,31 +6,9 @@ module CsvImportTestUtils
         [transformed, errors]
       end
     end
-
-    class Error
-      def initialize(error_msg)
-        @error_msg = error_msg
-      end
-
-      def process(source, errors)
-        errors.add(:phony_error, @error_msg)
-        [source, errors]
-      end
-    end
   end
 
   module Processors
-    class Error
-      def initialize(error_msg)
-        @error_msg = error_msg
-      end
-
-      def process(source, transformed, errors)
-        errors.add(:phony_error, @error_msg)
-        [transformed, errors]
-      end
-    end
-
     class PassThrough
       def process(source, transformed, errors)
         [transformed.merge(source), errors]
@@ -45,4 +23,27 @@ module CsvImportTestUtils
     end
   end
 
+  module FlexiProcessors # Handle both processors and pre-processors
+    class SkipRows
+      def initialize(rows)
+        @rows = rows
+      end
+
+      def process(*args)
+        return nil if @rows.include? args[-1].row_index
+        args[-2..2]
+      end
+    end
+
+    class Error
+      def initialize(error_msg)
+        @error_msg = error_msg
+      end
+
+      def process(*args)
+        args[-1].add(:phony_error, @error_msg)
+        args[-2..2]
+      end
+    end
+  end
 end

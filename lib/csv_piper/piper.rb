@@ -43,14 +43,18 @@ module CsvPiper
 
     def process_row(row_index, row)
       pre_processed_row, row_errors = pre_processors.reduce([row, Errors::Row.new(row_index)]) do |memo, processor|
-        processor.process(*memo)
+        output = processor.process(*memo)
+        return if output.nil?
+        output
       end
 
       frozen_row = pre_processed_row.freeze
 
       processed_data = {}
       processed_data, row_errors = processors.reduce([processed_data, row_errors]) do |memo, processor|
-        processor.process(frozen_row, *memo)
+        output = processor.process(frozen_row, *memo)
+        return if output.nil?
+        output
       end
     end
 
