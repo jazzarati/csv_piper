@@ -1,0 +1,19 @@
+---
+engines:
+  rubocop:
+    enabled: true
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - "**.rb"
+languages:
+  Ruby: true
+exclude_paths:
+- spec/**/*
+- vendor/**/*
+- "*.md"
+- "*.yml"
+- "*.txt"
+- ".rspec"
+- ".gitignore"

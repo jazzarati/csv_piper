@@ -37,23 +37,23 @@ module CsvPiper
 
     def process_csv_body
       csv.each.with_index(FIRST_DATA_LINE_INDEX) do |row, index|
-        processed_data, row_errors = process_row(row.to_hash, Errors::Row.new(index))
+        process_row(row.to_hash, Errors::Row.new(index))
       end
     end
 
     def process_row(row, row_errors)
       pre_processed_row, row_errors = pre_processors.reduce([row, row_errors]) do |memo, processor|
         output = processor.process(*memo)
-        return if output.nil?
+        return nil if output.nil?
         output
       end
 
       frozen_row = pre_processed_row.freeze
 
       processed_data = {}
-      processed_data, row_errors = processors.reduce([processed_data, row_errors]) do |memo, processor|
+      processors.reduce([processed_data, row_errors]) do |memo, processor|
         output = processor.process(frozen_row, *memo)
-        return if output.nil?
+        return nil if output.nil?
         output
       end
     end

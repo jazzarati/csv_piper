@@ -7,7 +7,7 @@ module CsvPiper
         @collect_when_invalid = collect_when_invalid
       end
 
-      def process(source, transformed, errors)
+      def process(_source, transformed, errors)
         @output << transformed if @collect_when_invalid || errors.empty?
         [transformed, errors]
       end

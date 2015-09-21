@@ -5,12 +5,12 @@ module CsvPiper
         @model_class = model_class
       end
 
-      def process(source, transformed, errors)
+      def process(_source, transformed, errors)
         model = @model_class.new(transformed)
 
         model.save if model.valid? && errors.empty?
 
-        errors.errors.merge!(model.errors.to_hash) do |key, old_val, new_val|
+        errors.errors.merge!(model.errors.to_hash) do |_key, old_val, new_val|
           old_val + new_val
         end
 
