@@ -48,7 +48,7 @@ describe CsvPiper::Processors::CreateActiveModel do
   context 'no row errors' do
     context 'without model errors' do
       it 'saves model' do
-        transformed, errors = described_class.new(Movie).process({}, model_attrs, no_errors)
+        described_class.new(Movie).process({}, model_attrs, no_errors)
         expect(Movie.find_by_title(title).attributes.except('id')).to eq(model_attrs)
       end
 

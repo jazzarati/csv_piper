@@ -475,7 +475,7 @@ Style/ParallelAssignment:
                   matches on both sides of the assignment.
                   This also provides performance benefits
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#parallel-assignment'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#parallel-assignment-vs-sequential-assignment-code'
+  # Reference: 'https://github.com/JuanitoFatas/fast-ruby#parallel-assignment-vs-sequential-assignment-code'
   Enabled: false
 
 Style/ParenthesesAroundCondition:
@@ -931,6 +931,8 @@ Lint/EnsureReturn:
 Lint/Eval:
   Description: 'The use of eval represents a serious security risk.'
   Enabled: true
+  Exclude:
+    - spec/end_to_end_spec.rb
 
 Lint/FormatParameterMismatch:
   Description: 'The number of parameters to format/sprint must match the fields.'

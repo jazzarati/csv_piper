@@ -16,7 +16,7 @@ module CsvImportTestUtils
     end
 
     class DownCase
-      def process(source, transformed, errors)
+      def process(_source, transformed, errors)
         new_transformed = transformed.each_with_object({}) { |(key, value), memo| memo[key] = value.downcase }
         [new_transformed, errors]
       end

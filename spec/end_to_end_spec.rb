@@ -42,10 +42,10 @@ describe 'end to end' do
   end
 
   class EvaluateEquation
-    def process(source, transformed, errors)
+    def process(_source, transformed, errors)
       begin
         transformed[:valid] = eval(transformed[:equation]) == true
-      rescue Exception
+      rescue NameError
         errors.add(:equation, transformed[:equation] + ' is not valid')
       end
       [transformed, errors]
@@ -58,7 +58,7 @@ describe 'end to end' do
       @output = []
     end
 
-    def process(source, transformed, errors)
+    def process(_source, transformed, errors)
       @output << {row: errors.row_index}.merge(transformed) if errors.empty?
       [transformed, errors]
     end

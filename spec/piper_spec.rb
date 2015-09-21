@@ -117,7 +117,7 @@ describe CsvPiper::Piper do
       let(:file) do
         CsvPiper::TestSupport::CsvMockFile.create(basic_headers,separator) do |f|
           f.add( basic_csv_row )
-          f.add( basic_csv_row.each_with_object({}) { |(k, v), memo| memo[k] = '' } )
+          f.add( basic_csv_row.each_with_object({}) { |(k, _), memo| memo[k] = '' } )
           f.add( basic_csv_row )
         end
       end

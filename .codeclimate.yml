@@ -10,7 +10,6 @@ ratings:
 languages:
   Ruby: true
 exclude_paths:
-- spec/**/*
 - vendor/**/*
 - "*.md"
 - "*.yml"
