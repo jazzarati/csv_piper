@@ -1,4 +1,12 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+if ENV['CODECLIMATE_REPO_TOKEN'].nil?
+  require 'simplecov'
+  SimpleCov.start
+else
+  require 'codeclimate-test-reporter'
+  CodeClimate::TestReporter.start
+end
+
 require 'csv_piper'
 require 'csv_piper/pre_processors/remove_extra_columns'
 require 'csv_piper/processors/collect_output'

@@ -177,12 +177,6 @@ describe CsvPiper::Piper do
 
   describe 'file setup is invalid' do
     describe 'required setup parameters' do
-      let(:file) do
-        CsvPiper::TestSupport::CsvMockFile.create(basic_headers) do |f|
-          f.add( basic_csv_row )
-        end
-      end
-
       it 'requires a file to process from' do
         expect { CsvPiper::Builder.new.build.process }.to raise_error RuntimeError
       end
