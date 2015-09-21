@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/csv_piper.svg)](http://badge.fury.io/rb/csv_piper) [![Build Status](https://travis-ci.org/jazzarati/csv_piper.svg?branch=master)](https://travis-ci.org/jazzarati/csv_piper) [![Code Climate](https://codeclimate.com/github/jazzarati/csv_piper/badges/gpa.svg)](https://codeclimate.com/github/jazzarati/csv_piper) [![Test Coverage](https://codeclimate.com/github/jazzarati/csv_piper/badges/coverage.svg)](https://codeclimate.com/github/jazzarati/csv_piper/coverage)
+[![Gem Version](https://badge.fury.io/rb/csv_piper.svg)](http://badge.fury.io/rb/csv_piper) [![Build Status](https://travis-ci.org/jazzarati/csv_piper.svg?branch=master)](https://travis-ci.org/jazzarati/csv_piper) [![Code Climate](https://codeclimate.com/github/jazzarati/csv_piper/badges/gpa.svg)](https://codeclimate.com/github/jazzarati/csv_piper) [![Test Coverage](https://codeclimate.com/github/jazzarati/csv_piper/badges/coverage.svg)](https://codeclimate.com/github/jazzarati/csv_piper/coverage) [![Dependency Status](https://gemnasium.com/jazzarati/csv_piper.svg)](https://gemnasium.com/jazzarati/csv_piper)
 
 # CsvPiper
 
