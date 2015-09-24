@@ -144,12 +144,24 @@ If you return `nil` instead of `[transformed, errors]` all further processing of
 
 _Return value_ is what will be passed into _source_ and _errors_ of the next pre-processor (and processors). Final pre-processor value of _source_ will be passed to each processor as a frozen hash. Final pre-processor value of _errors_ will be passed to the first processor.
 
-#### Row Errors
-This object is passed into each processor (which must pass it on) and is used to accumulate any and all errors for the particular row. You can access the row number through `row_index`.
+## Error Handling
+
+#### Built-in
+
+The `Errors::Row` object is passed into each processor as the last parameter to process (which must pass it on) and is used to accumulate any and all errors for the particular row being processed. This is useful to collect all errors for display to your users rather than just failing on first error (if this mode matches your use case). You can add the built-in `CollectErrors` processor as one of the final processors and this will allow you to grab all the errors ever occured once processing all rows have finished if desired.
 
 Add errors using `errors.add(error_key, error)`.
 
-#### Builder Options
+You can access the row number being processed through `row_index` which can be useful for displaying or logging errors.
+
+#### Do-it-yourself
+
+You can ignore the `Errors::Row` passed in to each processor and just handle error cases anyway you feel like. You can pass in a logger object in the construction of each of your processors if you want to use it during processing rows to handle errors.
+
+## Builder
+
+CsvPiper provides a builder class to allow nicer creation of the piper object.
+
 All builder options utilise the _fluent interface pattern_ and should be followed by a call to `build` to get the piper instance and then `process` to process the csv.
 
 Eg. `CsvPiper::Builder.new.from(io).with_processors(processors).build.process`
