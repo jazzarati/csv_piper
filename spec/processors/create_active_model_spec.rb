@@ -43,18 +43,17 @@ describe CsvPiper::Processors::CreateActiveModel do
   end
   let(:title) { 'Avengers' }
   let(:model_attrs)  { { 'title' => title, 'review' => '+1' } }
-  let(:transformed_in) { model_attrs.dup }
   let(:invalid_model_attrs)  { { 'review' => 'Horrible' } }
 
   context 'no row errors' do
     context 'without model errors' do
       it 'saves model' do
-        described_class.new(Movie).process({}, transformed_in, no_errors)
+        described_class.new(Movie).process({}, model_attrs, no_errors)
         expect(Movie.find_by_title(title).attributes.except('id')).to eq(model_attrs)
       end
 
       it 'passes on inputs with the model' do
-        transformed, errors = described_class.new(Movie).process({}, transformed_in, no_errors)
+        transformed, errors = described_class.new(Movie).process({}, model_attrs, no_errors)
 
         expect(transformed.except(:movie_model)).to eq(model_attrs)
         expect(transformed[:movie_model].attributes.except('id')).to eq(model_attrs)
@@ -70,7 +69,7 @@ describe CsvPiper::Processors::CreateActiveModel do
       end
 
       it 'passes on inputs with the model' do
-        transformed, _ = described_class.new(Movie).process({}, transformed_in, no_errors)
+        transformed, _ = described_class.new(Movie).process({}, model_attrs, no_errors)
 
         expect(transformed.except(:movie_model)).to eq(model_attrs)
         expect(transformed[:movie_model].attributes.except('id')).to eq(model_attrs)

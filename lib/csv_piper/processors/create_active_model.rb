@@ -14,7 +14,7 @@ module CsvPiper
           old_val + new_val
         end
 
-        transformed["#{@model_class.name.underscore}_model".to_sym] = model
+        transformed = transformed.merge({ "#{@model_class.name.underscore}_model".to_sym => model })
         [transformed, errors]
       end
     end
